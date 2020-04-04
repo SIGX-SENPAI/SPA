@@ -54,22 +54,49 @@ export class HeroesService {
       casa: 'Marvel'
     }
   ];
-  constructor() {
-    console.log('Servicio listo para usar!!!');
-  }
+  constructor() { }
 
   getHeroes(): Heroe[] {
     return this.heroes;
   }
 
-  getHeroe( idx: string ){
+  getHeroe(idx: string) {
+    console.log(idx);
     return this.heroes[idx];
   }
+  buscarHeroes(termino: string) {
+    let heroesArr: Heroe[] = [];
+    for (let i = 0; i < this.heroes.length ; i++) {
+      let heroe = this.heroes[i];
+      let nombre = heroe.nombre.toLowerCase();
+      if (nombre.indexOf(termino) >= 0) {
+        heroe.idx = i;
+        heroesArr.push(heroe);
+      }
+    }
+    return heroesArr;
+  }
+
+  // buscarindiceHeroe(termino: string) {
+  //   // let heroesArr: Heroe[] = [];
+  //   let i = 0;
+  //   for (let heroe of this.heroes) {
+  //     let nombre = heroe.nombre.toLowerCase();
+  //     if (nombre >= termino) {
+  //       // heroesArr.push(heroe);
+  //       return i;
+  //     } else {
+  //       i = i + 1;
+  //     }
+  //   }
+  //   // return heroesArr;
+  // }
 }
-export interface Heroe{
+export interface Heroe {
   nombre: string;
   bio: string;
   img: string;
   aparicion: string;
   casa: string;
+  idx?: number;
 }
